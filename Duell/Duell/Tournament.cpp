@@ -62,7 +62,7 @@ void Tournament::PrintResults() const
 
 void Tournament::RunTournament()
 {
-  Game round();
+  Game round;
   round.PlayGame();
   while(TournamentContinue())
   {
