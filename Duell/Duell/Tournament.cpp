@@ -18,8 +18,9 @@ using namespace std;
 Tournament::Tournament()
 {
   round_num_ = 0;
-  p1_wins_ = 0;
-  p2_wins_ = 0;
+  human_wins_ = 0;
+  computer_wins_ = 0;
+  InitializeTournament();
 }
 
 
@@ -27,22 +28,62 @@ Tournament::~Tournament()
 {
 }
 
-void Tournament::TournamentStart()
+void Tournament::InitializeTournament()
 {
   cout << "Welcome to Philip Fuster's implementation of Duell in c++ :)" << endl;
-  string line;
-  int num;
-  while (cout << "How many players?(1 or 2) " && getline(cin, line))
-  {
-    istringstream is{ line };
+  
 
-    if (is >> num && !(is >> line))
+
+}
+
+void Tournament::PrintResults() const
+{
+  cout << p1_name_ << " Wins: " << human_wins_ << endl;
+  cout << p2_name_ << " Wins: " << computer_wins_ << endl;
+  string winner;
+
+  
+  if (human_wins_ > computer_wins_)
+  {
+    winner = p1_name_;
+  }
+  if (computer_wins_ > human_wins_)
+  {
+    winner = p2_name_;
+  }
+  else
+  {
+    cout << "The tournament resulted in a draw!" << endl;
+    return;
+  }
+
+  cout << "Winner is " << winner << ". Congratulations!" << endl;
+}
+
+void Tournament::RunTournament()
+{
+  Game round();
+  round.PlayGame();
+  while(TournamentContinue())
+  {
+    round.PlayGame();
+  }
+}
+
+bool Tournament::TournamentContinue() const
+{
+  string line;
+  while(cout << "Would you like to player another round?(y or n) " && getline(cin, line) )
+  {
+    if (line == "y" || line == "n")
     {
       break;
     }
   }
 
-  Game round(num);
+  if (line == "y") return true;
+  return false;
+  
 
 
 }
@@ -50,15 +91,11 @@ void Tournament::TournamentStart()
 
 int main(int argc, char* argv[])
 {
-  //Tournament T;
-  //T.TournamentStart();
+  Tournament t;
+  t.RunTournament();
+  
+  
 
   
-  Board game_board;
-  BoardView view(game_board);
-  Human H;
-  Computer C;
-  C.AttachBoard(game_board);
-  H.AttachBoard(game_board);
-  view.PrintBoard(game_board);
+  
 }

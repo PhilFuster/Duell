@@ -3,21 +3,26 @@
 #include "Player.h"
 #include "Computer.h"
 #include "Human.h"
+#include "BoardView.h"
+#include "Board.h"
+
 
 class Game
 {
 public:
-    Game(int num_of_players);
+    Game();
     ~Game();
     void PlayGame();
     void IsFirst();
-    void NextTurn(bool turn);
+    void NextTurn() ;
 
 private:
-  //true for player 1 false for player 2
-  bool player_turn_;
-
+  //If true human turn false computer turn
+  bool is_human_turn_;
+  Board game_board_;
+  BoardView view_;
   //An array of pointers to pointers of Player objects
   Player **player_array_ = new Player*[2];
+  
 };
 

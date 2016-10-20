@@ -5,8 +5,8 @@ class KeyDie :
 {
 public:
     KeyDie(char player_initial);
-    virtual ~KeyDie();
-    void Roll() override;
+    ~KeyDie();
+    void Roll(char direction) override;
     string getName() const override;
     
 

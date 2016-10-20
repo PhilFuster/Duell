@@ -7,7 +7,7 @@
 class BoardView
 {
 public:
-    BoardView(Board &grid);
+    BoardView();
     ~BoardView();
     void PrintBoard(const Board &grid) const;
 };

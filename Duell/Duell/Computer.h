@@ -9,5 +9,6 @@ public:
     //Used if wanted to see 2 computers play each other
     Computer(string name, int home_row);
     ~Computer();
+    void CreateMove(Board & B) override;
 };
 

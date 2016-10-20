@@ -45,35 +45,61 @@ void Board::CreatePlayerDie(char player_initial, int home_row, vector<Die*>& pla
     if (i == 4)
     {
       KeyDie *KD = new KeyDie(player_initial);
+      KD->setDieLocation(home_row, i);
       grid_[home_row][i] = KD;
       player_die_collection.push_back(KD);
       if(home_row == 7)
       {
-        player_1_die_collection_.push_back(KD);
+        computer_die_collection_.push_back(KD);
       }
-      player_2_die_collection_.push_back(KD);
+      human_die_collection_.push_back(KD);
     }else
     {
       NormalDie *ND = new NormalDie(set_up_[i], player_initial);
+      ND->setDieLocation(home_row, i);
       grid_[home_row][i] = ND;
       player_die_collection.push_back(ND);
       if (home_row == 7)
       {
-        player_1_die_collection_.push_back(ND);
+        computer_die_collection_.push_back(ND);
       }
-      player_2_die_collection_.push_back(ND);
+      human_die_collection_.push_back(ND);
     }
   }
 }
 
+bool Board::isWinner() const
+{
+  if( ( !isEmpty(computer_key_square_location_.row, computer_key_square_location_.column) ) 
+     && ( grid_[computer_key_square_location_.row][computer_key_square_location_.column]->getPlayerInitial() == human_die_collection_[0]->getPlayerInitial() ) 
+     ||  computer_die_collection_[4]->isCaptured() || (!isEmpty(human_key_square_location_.row, human_key_square_location_.column))
+     && (grid_[human_key_square_location_.row][human_key_square_location_.column]->getPlayerInitial() == computer_die_collection_[0]->getPlayerInitial())
+     || human_die_collection_[4]->isCaptured())
+  {
+    //Last player to move has won the game
+    return true;
+  }
+  //No winner
+  return false;
+}
+
+
+bool Board::isEmpty(int row, int column) const
+{
+  if(grid_[row - 1][column] == nullptr)
+  {
+    return true;
+  }
+  return false;
+}
 
 //Based on the player's home row getPlayerDieCollection returns the other
 //players die collection
-vector<Die *> Board::getPlayerDieCollection(int home_row) const
+vector<Die *> Board::getOpponentDieCollection(int home_row) const
 {
-  if(home_row == 7)
+  if(home_row == computer_home_row_)
   {
-    return player_2_die_collection_;
+    return human_die_collection_;
   }
-  return player_1_die_collection_;
+  return computer_die_collection_;
 }
