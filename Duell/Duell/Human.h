@@ -10,6 +10,9 @@ public:
     //Used when there are 2 human players
     Human(string name, int home_row);
     ~Human();
+    
+    void Play(Board & B) override;
+    void CreateMove(Board & B) override;
 
     
 };

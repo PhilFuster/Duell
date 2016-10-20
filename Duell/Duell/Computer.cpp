@@ -17,3 +17,7 @@ Computer::Computer(string name, int home_row) : Player(name, home_row)
 Computer::~Computer()
 {
 }
+
+void Computer::CreateMove(Board & B)
+{
+}

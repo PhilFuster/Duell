@@ -1,20 +1,22 @@
 //
 //Class for a Tournament of Duell Games 
 #pragma once
+#include <string>
 
-#include "Player.h"
+using namespace std;
 
 class Tournament
 {
 public:
     Tournament();
     ~Tournament();
-    void TournamentStart();
-    void TournamentContinue();
+    void InitializeTournament();
+    void PrintResults() const;
+    void RunTournament();
+    bool TournamentContinue() const;
 private:
   int round_num_;
-  int p1_wins_;
-  int p2_wins_;
-
+  int human_wins_;
+  int computer_wins_;
 };
 

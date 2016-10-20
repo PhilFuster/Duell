@@ -11,7 +11,7 @@ class NormalDie :
 public:
     NormalDie(int up_face, char player_initial);
     virtual ~NormalDie();
-    void Roll() override;
+    void Roll(char direction) override;
     void InitDieMap(int up_face);
     string getName() const override;
     

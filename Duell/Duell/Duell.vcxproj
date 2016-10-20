@@ -147,8 +147,10 @@
     <ClInclude Include="Computer.h" />
     <ClInclude Include="Die.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="KeyDie.h" />
+    <ClInclude Include="Move.h" />
     <ClInclude Include="NormalDie.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tournament.h" />
@@ -159,8 +161,10 @@
     <ClCompile Include="Computer.cpp" />
     <ClCompile Include="Die.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="KeyDie.cpp" />
+    <ClCompile Include="Move.cpp" />
     <ClCompile Include="NormalDie.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tournament.cpp" />

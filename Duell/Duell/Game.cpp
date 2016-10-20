@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Tournament.h"
 #include "Computer.h"
 #include "Human.h"
 #include "Board.h"
@@ -8,21 +7,15 @@
 
 
 
-Game::Game(int num_of_players)
+Game::Game()
 {
   IsFirst();
-  if (num_of_players == 2)
-  {
-    player_array_[0] = new Human("Player", 7);
-    player_array_[1] = new Human("Human", 0);
-
-  }
-  else if (num_of_players == 1)
-  {
-    player_array_[0] = new Computer;
-    player_array_[1] = new Human;
-  }
-  PlayGame();
+  
+  player_array_[0] = new Computer("Computer", 7);
+  player_array_[1] = new Human("Human", 0);
+  
+  player_array_[0]->AttachBoard(game_board_);
+  player_array_[1]->AttachBoard(game_board_);
 
 }
 
@@ -33,33 +26,48 @@ Game::~Game()
 
 void Game::PlayGame()
 {
+  //view_.PrintBoard(game_board_);
+
+  //TODO: Serialization and a function maybe ContinueGame()
+  //After a player makes a move ask the user whether they would like to continue 
+  //or save game and exit
+  while(!game_board_.isWinner())
+  {
+    NextTurn();
+    is_human_turn_ = !is_human_turn_;
+  }
+  
+
 
 }
 
 void Game::IsFirst()
 {
   srand(time(NULL));
-  int player1Roll = (rand() % 6) + 1;
-  int player2Roll = (rand() % 6) + 1;
-  while (player1Roll == player2Roll)
+  int human_roll = (rand() % 6) + 1;
+  int computer_roll = (rand() % 6) + 1;
+  while (human_roll == computer_roll)
   {
-    player1Roll = (rand() % 6) + 1;
-    player2Roll = (rand() % 6) + 1;
+    human_roll = (rand() % 6) + 1;
+    computer_roll = (rand() % 6) + 1;
   }
 
-  if (player1Roll > player2Roll)
-  {
-    
-    player_turn_ = true;
-  }
-  else
-  {
-    
-    player_turn_ = false;
-  }
+
+  human_roll > computer_roll ? is_human_turn_ = true : is_human_turn_ = false;
+  //TODO: Don't forget to set back to the ternary above
+  //is_human_turn_ = false;
 
 }
 
-void Game::NextTurn(bool turn)
+void Game::NextTurn() 
 {
+
+  if(is_human_turn_)
+  {
+    player_array_[0]->Play(game_board_);
+    
+  }
+
+  player_array_[1]->Play(game_board_);
+  
 }

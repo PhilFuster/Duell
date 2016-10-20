@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-BoardView::BoardView(Board & grid)
+BoardView::BoardView()
 {
 }
 
@@ -24,22 +24,22 @@ void BoardView::PrintBoard(const Board & grid) const
       {
         cout << i << " ";
       }
-      if (grid.getElement(i, j) == "false")
+      if (grid.isEmpty(i, j))
       {
 
-        cout << "   " << "0" << "   ";
+        cout << " " << "0" << "  ";
       }
       else
       {
 
-        cout << "  " << grid.getElement(i, j) << "  ";
+        cout << grid.getElement(i, j) << " ";
       }
 
     }
     cout << endl;
     if (i == 1)
     {
-      cout << "     1      2      3      4      5      6      7      8      9" << endl;
+      cout << "   1   2   3   4   5   6   7   8   9" << endl;
     }
   }
 }
